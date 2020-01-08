@@ -13,6 +13,19 @@ function handleSubmit(e) {
     id: Date.now(),
     complete: false,
   };
+  // Push the items into our state
+  items.push(item);
+  console.log(`There are now ${items.length} in your state`);
+  // Clear the form
+  // e.currentTarget.item.value = '';   OR
+  e.target.reset(); // all target
+  displayItems();
+}
+
+function displayItems() {
+  console.log(items);
+  const html = items.map(item => `<li>${item.name}</li>`).join('');
+  list.innerHTML = html;
 }
 
 shoppingForm.addEventListener('submit', handleSubmit);
