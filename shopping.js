@@ -44,6 +44,31 @@ function mirrorToLocalStorage() {
   localStorage.setItem('items', JSON.stringify(items));
 }
 
+function restoreFromLocalStorage() {
+  console.info('Restoring from LS');
+  // Pull the items from LS
+  const lsItems = JSON.parse(localStorage.getItem('items'));
+  if (lsItems.length) {
+    // items = lsItems;
+    // lsItems.forEach(item => items.push(item));
+    // items.push(lsItems[0]);
+    items.push(...lsItems); // ---- SPREAD = ...
+    list.dispatchEvent(new CustomEvent('itemsUpdated'));
+  }
+}
+
+function deleteItem(id) {
+  console.log('DELETING ITEM');
+}
+
 shoppingForm.addEventListener('submit', handleSubmit);
 list.addEventListener('itemsUpdated', displayItems);
 list.addEventListener('itemsUpdated', mirrorToLocalStorage);
+// Event delegation: We listened for the click on the list <ul> but then delegate the
+// click over to the button if that is what was clicked
+list.addEventListener('click', function(e) {
+  if (e.target.matches('button')) {
+    deleteItem();
+  }
+});
+restoreFromLocalStorage();
