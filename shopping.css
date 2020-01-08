@@ -31,14 +31,14 @@ body {
   grid-template-columns: auto 1fr auto;
   grid-gap: 1rem;
   align-items: center;
-  border-bottom: 1px solid var(--gray);
+  border-bottom: 1px solid var(--red);
 }
 
 .shopping-item input[type="checkbox"] {
   margin-right: 1rem;
 }
 
-.shopping-item input[type="checkbox"]:checked + .itemName {
+.shopping-item input[type="checkbox"]:checked+.itemName {
   opacity: 0.5;
 }
 
